@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		8EF24DCC11DF489B980A3391 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C5BC63DC1BDB42D5AB12BE81 /* libPods.a */; };
 		AA8AC2C11B96CD1100797107 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = AA8AC2C01B96CD1100797107 /* main.m */; };
 		AA8AC2C41B96CD1100797107 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = AA8AC2C31B96CD1100797107 /* AppDelegate.m */; };
 		AA8AC2C71B96CD1100797107 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AA8AC2C61B96CD1100797107 /* ViewController.m */; };
@@ -14,6 +15,9 @@
 		AA8AC2CC1B96CD1100797107 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AA8AC2CB1B96CD1100797107 /* Images.xcassets */; };
 		AA8AC2CF1B96CD1100797107 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = AA8AC2CD1B96CD1100797107 /* LaunchScreen.xib */; };
 		AA8AC2DB1B96CD1100797107 /* WeatherMapMantleTests.m in Sources */ = {isa = PBXBuildFile; fileRef = AA8AC2DA1B96CD1100797107 /* WeatherMapMantleTests.m */; };
+		AA8AC2E91B96D9A800797107 /* ViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = AA8AC2E81B96D9A800797107 /* ViewModel.m */; };
+		AAFAB88C1B9705AA006B1E1A /* QMapElement.m in Sources */ = {isa = PBXBuildFile; fileRef = AAFAB88B1B9705AA006B1E1A /* QMapElement.m */; };
+		AAFAB8901B971370006B1E1A /* WeatherCondition.m in Sources */ = {isa = PBXBuildFile; fileRef = AAFAB88F1B971370006B1E1A /* WeatherCondition.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -27,6 +31,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		608E1B78DECB415496A156E5 /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = "<group>"; };
 		AA8AC2BB1B96CD1100797107 /* WeatherMapMantle.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WeatherMapMantle.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AA8AC2BF1B96CD1100797107 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		AA8AC2C01B96CD1100797107 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -40,6 +45,14 @@
 		AA8AC2D41B96CD1100797107 /* WeatherMapMantleTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = WeatherMapMantleTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		AA8AC2D91B96CD1100797107 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		AA8AC2DA1B96CD1100797107 /* WeatherMapMantleTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WeatherMapMantleTests.m; sourceTree = "<group>"; };
+		AA8AC2E71B96D9A800797107 /* ViewModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ViewModel.h; sourceTree = "<group>"; };
+		AA8AC2E81B96D9A800797107 /* ViewModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ViewModel.m; sourceTree = "<group>"; };
+		AAFAB88A1B9705AA006B1E1A /* QMapElement.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QMapElement.h; sourceTree = "<group>"; };
+		AAFAB88B1B9705AA006B1E1A /* QMapElement.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QMapElement.m; sourceTree = "<group>"; };
+		AAFAB88D1B970D13006B1E1A /* WeatherMapMantle.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WeatherMapMantle.pch; sourceTree = "<group>"; };
+		AAFAB88E1B971370006B1E1A /* WeatherCondition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WeatherCondition.h; sourceTree = "<group>"; };
+		AAFAB88F1B971370006B1E1A /* WeatherCondition.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WeatherCondition.m; sourceTree = "<group>"; };
+		C5BC63DC1BDB42D5AB12BE81 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -47,6 +60,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8EF24DCC11DF489B980A3391 /* libPods.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -60,12 +74,22 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		48CA28C522D5414E94CDB776 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				C5BC63DC1BDB42D5AB12BE81 /* libPods.a */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		AA8AC2B21B96CD1100797107 = {
 			isa = PBXGroup;
 			children = (
 				AA8AC2BD1B96CD1100797107 /* WeatherMapMantle */,
 				AA8AC2D71B96CD1100797107 /* WeatherMapMantleTests */,
 				AA8AC2BC1B96CD1100797107 /* Products */,
+				608E1B78DECB415496A156E5 /* Pods.xcconfig */,
+				48CA28C522D5414E94CDB776 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -81,6 +105,8 @@
 		AA8AC2BD1B96CD1100797107 /* WeatherMapMantle */ = {
 			isa = PBXGroup;
 			children = (
+				AAFAB88A1B9705AA006B1E1A /* QMapElement.h */,
+				AAFAB88B1B9705AA006B1E1A /* QMapElement.m */,
 				AA8AC2C21B96CD1100797107 /* AppDelegate.h */,
 				AA8AC2C31B96CD1100797107 /* AppDelegate.m */,
 				AA8AC2C51B96CD1100797107 /* ViewController.h */,
@@ -89,6 +115,10 @@
 				AA8AC2CB1B96CD1100797107 /* Images.xcassets */,
 				AA8AC2CD1B96CD1100797107 /* LaunchScreen.xib */,
 				AA8AC2BE1B96CD1100797107 /* Supporting Files */,
+				AA8AC2E71B96D9A800797107 /* ViewModel.h */,
+				AA8AC2E81B96D9A800797107 /* ViewModel.m */,
+				AAFAB88E1B971370006B1E1A /* WeatherCondition.h */,
+				AAFAB88F1B971370006B1E1A /* WeatherCondition.m */,
 			);
 			path = WeatherMapMantle;
 			sourceTree = "<group>";
@@ -98,6 +128,7 @@
 			children = (
 				AA8AC2BF1B96CD1100797107 /* Info.plist */,
 				AA8AC2C01B96CD1100797107 /* main.m */,
+				AAFAB88D1B970D13006B1E1A /* WeatherMapMantle.pch */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -126,9 +157,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = AA8AC2DE1B96CD1100797107 /* Build configuration list for PBXNativeTarget "WeatherMapMantle" */;
 			buildPhases = (
+				D514CB7CDCA8410FB32A2F90 /* Check Pods Manifest.lock */,
 				AA8AC2B71B96CD1100797107 /* Sources */,
 				AA8AC2B81B96CD1100797107 /* Frameworks */,
 				AA8AC2B91B96CD1100797107 /* Resources */,
+				4853066E14D540D3A1D547D0 /* Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -168,6 +201,7 @@
 				TargetAttributes = {
 					AA8AC2BA1B96CD1100797107 = {
 						CreatedOnToolsVersion = 6.4;
+						DevelopmentTeam = ZHDZB47VKB;
 					};
 					AA8AC2D31B96CD1100797107 = {
 						CreatedOnToolsVersion = 6.4;
@@ -214,12 +248,48 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		4853066E14D540D3A1D547D0 /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Pods-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		D514CB7CDCA8410FB32A2F90 /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		AA8AC2B71B96CD1100797107 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 				AA8AC2C71B96CD1100797107 /* ViewController.m in Sources */,
+				AA8AC2E91B96D9A800797107 /* ViewModel.m in Sources */,
+				AAFAB88C1B9705AA006B1E1A /* QMapElement.m in Sources */,
+				AAFAB8901B971370006B1E1A /* WeatherCondition.m in Sources */,
 				AA8AC2C41B96CD1100797107 /* AppDelegate.m in Sources */,
 				AA8AC2C11B96CD1100797107 /* main.m in Sources */,
 			);
@@ -345,8 +415,12 @@
 		};
 		AA8AC2DF1B96CD1100797107 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 608E1B78DECB415496A156E5 /* Pods.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer: su jian (3Y6QN55DW4)";
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = WeatherMapMantle/WeatherMapMantle.pch;
 				INFOPLIST_FILE = WeatherMapMantle/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -355,8 +429,12 @@
 		};
 		AA8AC2E01B96CD1100797107 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 608E1B78DECB415496A156E5 /* Pods.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer: su jian (3Y6QN55DW4)";
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = WeatherMapMantle/WeatherMapMantle.pch;
 				INFOPLIST_FILE = WeatherMapMantle/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -416,6 +494,7 @@
 				AA8AC2E01B96CD1100797107 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		AA8AC2E11B96CD1100797107 /* Build configuration list for PBXNativeTarget "WeatherMapMantleTests" */ = {
 			isa = XCConfigurationList;
@@ -424,6 +503,7 @@
 				AA8AC2E31B96CD1100797107 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

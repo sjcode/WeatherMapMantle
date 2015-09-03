@@ -7,21 +7,128 @@
 //
 
 #import "ViewController.h"
+#import <CoreLocation/CoreLocation.h>
+@import AddressBookUI;
+#import "ViewModel.h"
+#import "TestModel.h"
+#import "QMapElement.h"
+#import <ReactiveCocoa.h>
+@interface ViewController ()<CLLocationManagerDelegate,QuickDialogDelegate>
 
-@interface ViewController ()
+@property (nonatomic, strong) ViewModel *viewModel;
+@property (nonatomic, strong) CLLocationManager *locmanager;
+@property (nonatomic, strong) CLGeocoder *geocoder;
+@property (nonatomic, strong) CLPlacemark *placemark;
 
+@property (nonatomic, strong) QLabelElement *longitude;
+@property (nonatomic, strong) QLabelElement *latitude;
+@property (nonatomic, strong) QTextElement *address;
+@property (nonatomic, strong) QElement *customCell;
+
+@property (nonatomic, strong) QLabelElement *date;
+@property (nonatomic, strong) QLabelElement *desc;
+@property (nonatomic, strong) QLabelElement *temp;
+@property (nonatomic, strong) QLabelElement *pressure;
 @end
 
 @implementation ViewController
 
-- (void)viewDidLoad {
-    [super viewDidLoad];
-    // Do any additional setup after loading the view, typically from a nib.
+- (void)awakeFromNib{
+    
+    self.viewModel = [[ViewModel alloc]init];
+    QRootElement *root = [[QRootElement alloc] init];
+    root.title = @"Weather";
+    root.grouped = YES;
+    self.root = root;
+    
+    QSection *sectionmap = [[QSection alloc]init];
+    sectionmap.title = @"Map";
+    QMapElement *mapElement = [[QMapElement alloc]initWithKey:@"map"];
+    mapElement.height = 160;
+    [sectionmap addElement:mapElement];
+    [self.root addSection:sectionmap];
+    
+    QSection *section = [[QSection alloc]initWithTitle:@"Location:"];
+    QLabelElement *longitude = [[QLabelElement alloc]initWithTitle:@"longitude" Value:@""];
+    longitude.key = @"longitude";
+    [section addElement:longitude];
+    QLabelElement *latitude = [[QLabelElement alloc]initWithTitle:@"latitude" Value:@""];
+    latitude.key = @"latitude";
+    [section addElement:latitude];
+    
+    [self.root addSection:section];
+    
+    QSection *addressSection = [[QSection alloc]initWithTitle:@"address:"];
+    QTextElement *address = [[QTextElement alloc]initWithText:@""];
+    address.key = @"address";
+    [addressSection addElement:address];
+    [self.root addSection:addressSection];
+    
+    QSection *weatherSection = [[QSection alloc]initWithTitle:@"weather:"];
+    
+    QLabelElement *date = [[QLabelElement alloc]initWithTitle:@"date" Value:@""];
+    date.key = @"date";
+    [weatherSection addElement:date];
+    QLabelElement *desc = [[QLabelElement alloc]initWithTitle:@"description" Value:@""];
+    desc.key = @"desc";
+    [weatherSection addElement:desc];
+    QLabelElement *temp = [[QLabelElement alloc]initWithTitle:@"temperature" Value:@""];
+    temp.key = @"temp";
+    [weatherSection addElement:temp];
+    QLabelElement *pressure = [[QLabelElement alloc]initWithTitle:@"pressure" Value:@""];
+    pressure.key = @"pressure";
+    [weatherSection addElement:pressure];
+    
+    [self.root addSection:weatherSection];
 }
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+- (void)viewDidLoad {
+    [super viewDidLoad];
+    
+    
+    self.longitude = (QLabelElement*)[self.quickDialogTableView.root elementWithKey:@"longitude"];
+    self.latitude = (QLabelElement*)[self.quickDialogTableView.root elementWithKey:@"latitude"];
+    self.address = (QTextElement*)[self.quickDialogTableView.root elementWithKey:@"address"];
+    self.customCell = (QElement*)[self.quickDialogTableView.root elementWithKey:@"mapview"];
+    
+    self.date = (QLabelElement*)[self.quickDialogTableView.root elementWithKey:@"date"];
+    self.desc = (QLabelElement*)[self.quickDialogTableView.root elementWithKey:@"desc"];
+    self.temp = (QLabelElement*)[self.quickDialogTableView.root elementWithKey:@"temp"];
+    self.pressure = (QLabelElement*)[self.quickDialogTableView.root elementWithKey:@"pressure"];
+    
+    RAC(self.address,text) = RACObserve(self.viewModel, address);
+    RAC(self.longitude,value) = RACObserve(self.viewModel, longitude);
+    RAC(self.latitude,value) = RACObserve(self.viewModel, latitude);
+    
+    RAC(self.date,value) = [RACObserve(self.viewModel,weatherModel)map:^id(WeatherCondition *weather) {
+        return weather.date.description;
+    }];
+    
+    RAC(self.desc,value) = [RACObserve(self.viewModel,weatherModel)map:^id(WeatherCondition *weather) {
+        return weather.weather.desc;
+    }];
+    
+    RAC(self.temp,value) = [RACObserve(self.viewModel.weatherModel.main, temp_max)map:^id(NSNumber *value) {
+        return [NSString stringWithFormat:@"%ld F",value.integerValue];
+    }];
+    RAC(self.pressure,value) = [RACObserve(self.viewModel.weatherModel.main, pressure)map:^id(NSNumber *value) {
+        return [NSString stringWithFormat:@"%ld aph",value.integerValue ];
+    }];
+    
+    [[RACSignal merge:@[RACObserve(self.viewModel, longitude),RACObserve(self.viewModel, latitude),RACObserve(self.viewModel, address)]]
+    subscribeNext:^(id _) {
+        [self.quickDialogTableView reloadData];
+    }];
+    
+
+
+    @weakify(self)
+    [self.viewModel.error subscribeNext:^(NSError *error) {
+        @strongify(self)
+        UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"Tip" message:@"Your phone has lost gps signal." preferredStyle:UIAlertControllerStyleAlert];
+        [alertController addAction:[UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:nil]];
+        [self presentViewController:alertController animated:YES completion:nil];
+    }];
 }
 
 @end

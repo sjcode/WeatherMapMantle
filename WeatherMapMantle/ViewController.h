@@ -7,8 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <Foundation/Foundation.h>
+#import <QuickDialog.h>
 
-@interface ViewController : UIViewController
+@interface ViewController : QuickDialogController
 
 
 @end
