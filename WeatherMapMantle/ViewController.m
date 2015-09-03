@@ -101,18 +101,27 @@
     RAC(self.latitude,value) = RACObserve(self.viewModel, latitude);
     
     RAC(self.date,value) = [RACObserve(self.viewModel,weatherModel)map:^id(WeatherCondition *weather) {
-        return weather.date.description;
+        NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+        dateFormatter.dateFormat = @"yyyy-MM-dd'T'HH:mm";
+        
+        NSTimeZone *gmt = [NSTimeZone timeZoneWithAbbreviation:@"GMT"];
+        [dateFormatter setTimeZone:gmt];
+        NSString *timeStamp = [dateFormatter stringFromDate:weather.date];
+        //return timeStamp;
+        
+        return [weather.date descriptionWithLocale:[NSLocale systemLocale]];
     }];
     
-    RAC(self.desc,value) = [RACObserve(self.viewModel,weatherModel)map:^id(WeatherCondition *weather) {
-        return weather.weather.desc;
-    }];
+    RAC(self.desc,value) = [[RACObserve(self.viewModel,weatherModel)map:^id(WeatherCondition *weather) {
+        WeatherModel *model = weather.weather[0];
+        return model.desc;
+    }]logNext];
     
-    RAC(self.temp,value) = [RACObserve(self.viewModel.weatherModel.main, temp_max)map:^id(NSNumber *value) {
-        return [NSString stringWithFormat:@"%ld F",value.integerValue];
+    RAC(self.temp,value) = [RACObserve(self.viewModel,weatherModel)map:^id(WeatherCondition *weather) {
+        return [NSString stringWithFormat:@"%ld F",weather.main.temp_max];
     }];
-    RAC(self.pressure,value) = [RACObserve(self.viewModel.weatherModel.main, pressure)map:^id(NSNumber *value) {
-        return [NSString stringWithFormat:@"%ld aph",value.integerValue ];
+    RAC(self.pressure,value) = [RACObserve(self.viewModel,weatherModel)map:^id(WeatherCondition *weather) {
+        return [NSString stringWithFormat:@"%ld aph",weather.main.pressure];
     }];
     
     [[RACSignal merge:@[RACObserve(self.viewModel, longitude),RACObserve(self.viewModel, latitude),RACObserve(self.viewModel, address)]]
@@ -120,6 +129,9 @@
         [self.quickDialogTableView reloadData];
     }];
     
+    [[RACObserve(self.viewModel,weatherModel)delay:1]  subscribeNext:^(id x) {
+        [self.quickDialogTableView reloadData];
+    }];
 
 
     @weakify(self)

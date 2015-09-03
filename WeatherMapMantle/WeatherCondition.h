@@ -23,5 +23,5 @@
 @property (nonatomic, copy) NSDate *date;
 @property (nonatomic, assign) NSInteger visibility;
 @property (nonatomic, strong) WeatherMainModel *main;
-@property (nonatomic, strong) WeatherModel *weather;
+@property (nonatomic, strong) NSArray *weather;
 @end
